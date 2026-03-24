@@ -7,7 +7,7 @@ on:
 jobs:
   automerge:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dockerhub-toolshed'
+    if: github.event.pull_request.user.login == 'arash77'
     steps:
       - uses: actions/create-github-app-token@v3
         id: app-token
@@ -16,6 +16,6 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Enable Pull Request Automerge
-        run: gh pr merge --merge --auto --repo "${{ github.repository }}" "${{ github.event.pull_request.number }}"
+        run: gh pr merge --merge --auto "${{ github.event.pull_request.number }}"
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
